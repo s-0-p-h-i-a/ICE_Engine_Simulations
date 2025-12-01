@@ -23,7 +23,9 @@ Current projects include:
 
     - Allows step-by-step progression via CLI input.
 
-2. **Arduino Inline-4 Crankshaft Simulation (WIP / PoC)**
+2. **Inline-4 Crankshaft Simulations, Arduino and CLI (WIP / PoC)**
+
+	- Functional CLI "sandbox" version for practice, using ASCII visuals to represent side view of the crankshaft.
     
     - Prototype to simulate crankshaft rotation using LEDs.
 

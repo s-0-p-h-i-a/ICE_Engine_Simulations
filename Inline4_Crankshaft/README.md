@@ -1,91 +1,64 @@
-# Arduino Inline-4 Crankshaft Simulation (WIP / PoC)
+# **Inline-4 Crankshaft Simulation: Arduino & CLI Versions**
 
-30/11
+**Updated:** 01/12/2025  
+**Status:** Work in progress, conceptual prototypes
 
-**Work in progress — conceptual prototype, not functional yet.**  
-This project simulates an inline-4 engine crankshaft with LEDs on an Arduino. It is intended as a **learning exercise in embedded C**, exploring state representation, multi-file structure, enum-based indexing, and hardware abstraction. The code demonstrates early-stage conceptual thinking about engine sequencing and state-machine logic; it is not production-ready and serves as a hands-on PoC for debugging and iterative learning.
-
----
-## Overview
-
-This project is a **first-layer prototype** to simulate an inline-4 engine crankshaft using LEDs on a breadboard. It is intended as a **learning exercise in embedded C**, exploring:
-
-- State representation of engine lobes
-
-- Basic multi-file C organization (`.h` / `.c`)
-
-- Enum-based indexing and arrays
-
-- Mapping logical state to hardware outputs (LEDs)
-
-- Simple conceptual state-machine behavior
-
-> **Note:** This project is not yet functional. The code is structured for conceptual understanding and debugging practice rather than real-world operation.
+This folder contains two complementary versions of an inline-4 engine crankshaft simulator: one targeting **Arduino hardware with LEDs** and one **CLI-based**, terminal visualization version. Both are learning-focused prototypes intended to explore **embedded C, state representation, multi-file project structure, and modular software design**.
 
 ---
-## Hardware Concept
+## **Overview**
 
-- 8 LEDs arranged in 2 rows, representing **TDC / BDC positions** for each cylinder lobe
+The project simulates the rotation of an inline-4 engine crankshaft through the 4-stroke cycle. Each version demonstrates **state-machine logic**, **visualization of crank positions**, and **separation of engine logic from output control**, but the implementations differ according to their output method:
 
-- 4 lobes, representing the cylinders of an inline-4 engine
+- **Arduino Version:** Maps crankshaft state to a **2-dimensional array of LED pins** (2 rows × 4 lobes), directly interfacing with hardware.
 
-- LEDs light up according to the **crankshaft state array**, toggling TDC ↔ BDC each loop
+- **CLI Version:** Uses simple **boolean TDC/BDC logic** to control ASCII output, rendering each lobe as a series of hyphens or spaces in the terminal.
 
+Both approaches reinforce the same underlying concepts, while giving different levels of abstraction and feedback for testing.
+
+---
+## **Hardware / Visualization Concepts**
+
+### **Arduino**
+
+- 8 LEDs (2 rows) represent TDC/BDC positions for each lobe
+- Crankshaft state determines which LEDs are on/off each loop
 - Firing order: 1-3-4-2
+- Uses arrays and enums for readable indexing of pins and lobes
 
-**Simplified visualization (conceptual):**
+### **CLI**
 
-|     | LOBE 1  | LOBE 2  | LOBE 3  | LOBE 4  |
-| --- | ------- | ------- | ------- | ------- |
-| TDC |         | ------- | ------- |         |
-| BDC | ------- |         |         | ------- |
-
----
-## Code Structure
-
-- `global.h/.c`: Definitions, pin mappings, constants, and global state
-
-- `setPins.h/.c`: Logic to determine which LED pin to light based on lobe state
-
-- `spinCrank.h/.c`: Writes output to LEDs
-
-- `crank_run.h/.c`: Updates crankshaft state per loop; conceptual state-machine logic
-
-- `initCrank.h/.c`: Initializes the crankshaft state
-
-- `main.c`: "Runs" the "engine"
-
-The code uses **booleans and arrays** to track lobe positions and **enums** for readable indexing.
+- Terminal output visualizes TDC/BDC positions per lobe with ASCII characters (`--------` for active TDC/BDC, spaces otherwise)
+- State machine logic mirrors Arduino version but without physical outputs
+- Provides a hardware-free way to test and debug engine sequencing and rotation logic
 
 ---
-## Purpose / Learning Goals
+## **Code Structure**
 
-This project is primarily a **hands-on practice tool** to:
+Both versions share the same **conceptual separation of concerns**:
 
-- Understand mapping between logical state and physical outputs
-
-- Explore multi-dimensional arrays for hardware abstraction
-
-- Practice iterative, modular C programming for embedded systems
-
-- Visualize engine cycle sequencing with LEDs
-
-It is intentionally a **proof-of-concept**, meant to be debugged, extended, and refined as a learning exercise.
+- **Engine logic** is separated from **output control**, mirroring the abstraction layers in real automotive ECUs.
+- Both versions use enums and arrays for readable indexing and maintainable state tracking.
+- CLI version adds `checkContinue` for user-interactive pausing every few cycles.
 
 ---
-## Next Steps
+## **Learning Goals**
 
-- Implement full **loop logic** to simulate continuous crankshaft rotation
+This project was designed as a hands-on exercise to:
 
-- Expand state machine to include **cycle phases (Intake, Compression, Combustion, Exhaust)**
+- Explore **multi-file C project structures** and folder separation
+- Understand **how the compiler and linker manage multiple `.c` and `.h` files**
+- Create **custom libraries** for engine state machine and output control
+- Practice **separating internal logic (engine state machine) from actuator/interface logic**
+- Visualize engine sequencing using **LEDs or terminal ASCII output**
+- Gain early exposure to **embedded software patterns** used in automotive ECUs
 
-- Optional: add timing control for realistic crankshaft speed visualization
+> The CLI version reinforces modular design and logic testing without hardware, while the Arduino version provides real-world interfacing experience.
 
 ---
-## Notes
+## **Next Steps / Future Work**
 
-- This project is part of a **series of engine simulation experiments** in the `ICE_Engine_Simulations` repository
-
-- All code is in early-stage PoC form; it is not production-ready
-
-- Designed for **learning and demonstration** of embedded C and engine sequencing concepts
+- Extend the CLI and Arduino versions to include **full cycle phases** (Intake, Compression, Combustion, Exhaust)
+- Implement **timed rotation loops** for more realistic engine speed simulation
+- Refactor engine logic into a reusable **C/C++ library** usable for both versions
+- Introduce **multi-cylinder synchronization and expanded visualization**
