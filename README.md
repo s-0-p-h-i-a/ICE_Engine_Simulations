@@ -2,6 +2,8 @@
 
 A collection of **learning-focused engine simulation projects** in C and Arduino. These early-stage experiments explore **state-machine logic, modular C design, and hardware abstraction** through CLI and LED-based prototypes. Projects are conceptual and work-in-progress, demonstrating understanding of engine sequencing and embedded systems thinking. They will be iteratively refined and expanded over time.
 
+**Fully functional:** CLI crankshaft simulation.
+
 **Current WIPs:** cylinder and crankshaft simulations.
 
 **Long-term goal:** add DOHC camshafts, fuel injection and spark plug projects, merge into simple Moore machine-like simulation of inline-4 engine control.
@@ -11,19 +13,7 @@ A collection of **learning-focused engine simulation projects** in C and Arduino
 
 Current projects include:
 
-1. **Inline-4 Engine CLI Simulation (v0 PoC)**
-    
-    - A command-line C application simulating a 4-stroke inline-4 engine.
-
-    - Tracks independent cylinder states, piston positions, valves, fuel injection, and spark timing.
-
-    - Implements a Moore-style finite state machine and a basic firing order (1-3-4-2).
-
-    - Focused on learning structs, enums, arrays, loops, and modular design, intentionally pointer-free.
-
-    - Allows step-by-step progression via CLI input.
-
-2. **Inline-4 Crankshaft Simulations, Arduino and CLI (WIP / PoC)**
+1. **Inline-4 Crankshaft Simulations, CLI (functional v0) Arduino (WIP / PoC)**
 
 	- Functional CLI "sandbox" version for practice, using ASCII visuals to represent side view of the crankshaft.
     
@@ -34,6 +24,18 @@ Current projects include:
     - Demonstrates state-machine thinking, enum-based indexing, and multi-file C organization.
 
     - Conceptual and not yet functional, intended as a visual, hardware-based learning exercise.
+
+2. **Inline-4 Engine CLI Simulation (v0 WIP / PoC)**
+    
+    - A command-line C application simulating a 4-stroke inline-4 engine.
+
+    - Tracks independent cylinder states, piston positions, valves, fuel injection, and spark timing.
+
+    - Implements a Moore-style finite state machine and a basic firing order (1-3-4-2).
+
+    - Focused on learning structs, enums, arrays, loops, and modular design, intentionally pointer-free.
+
+    - Allows step-by-step progression via CLI input.
     
 3. **Arduino 1-Cylinder Simulation (WIP / PoC)**
     
