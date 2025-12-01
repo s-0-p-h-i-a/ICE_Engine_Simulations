@@ -11,6 +11,8 @@ It was built as a **training project for embedded/automotive development**, focu
 
 ![Terminal window running ASCII crankshaft visualisation](demogif.gif)
 
+Milestone: First fully functional engine simulation demonstrating crankshaft state updates, visual output, and modular library use in a complete, running CLI prototype.
+
 ---
 ## **Project Goals**
 
@@ -71,7 +73,6 @@ Simulating the engine cycle in the terminal provides:
 - ANSI escape sequences redraw the frame to keep the output readable.
 
 ---
-
 ## File Structure
 
 ```
