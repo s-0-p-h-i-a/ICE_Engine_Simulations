@@ -77,7 +77,7 @@ int main() {
 		crankshaft[i] = initCrank(i);
 	}
 	
-	// Run the engine
+	// Control flag
 	bool continueRunning = checkContinue();
 	
 	// To pause every INTERVAL = 8 loops and extra infinite loop prevention
