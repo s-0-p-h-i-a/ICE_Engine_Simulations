@@ -13,15 +13,19 @@ A collection of **learning-focused engine simulation projects** in C and Arduino
 
 Current projects include:
 
-1. **[Arduino 1-Cylinder Simulation (v0 WIP)](https://github.com/s-0-p-h-i-a/ICE_Engine_Simulations/tree/main/1_Cylinder)**
+1. **Cylinder + Crankshaft Embedded Sytem (WIP)**
+
+	- Combines previously developed servo + Hall sensor flywheel RPM calculation and LED cylinder visualisation "modules" as the first step towards developing an inline-4 engine simulation embedded system. Planned additions so far are an iteration of the crankshaft simulation and DOHC camshafts.
+
+2. **[Arduino 1-Cylinder Simulation (v0 WIP)](https://github.com/s-0-p-h-i-a/ICE_Engine_Simulations/tree/main/1_Cylinder)**
     
     - Simulates one cylinder moving through combustion cycle using LEDs and a breadboard.
 
-2. **[Inline-4 Crankshaft Simulations, CLI (functional v0) and Arduino (WIP / PoC)](https://github.com/s-0-p-h-i-a/ICE_Engine_Simulations/tree/main/Inline4_Crankshaft)**
+3. **[Inline-4 Crankshaft Simulations, CLI (functional v0) and Arduino (WIP / PoC)](https://github.com/s-0-p-h-i-a/ICE_Engine_Simulations/tree/main/Inline4_Crankshaft)**
 
 	- Functional CLI "sandbox" version for practice, using ASCII visuals to represent side view of the crankshaft.
 
-3. **[Inline-4 Engine CLI Simulation (v0 WIP / PoC)](https://github.com/s-0-p-h-i-a/ICE_Engine_Simulations/tree/main/Engine_Cycle_CLI)**
+4. **[Inline-4 Engine CLI Simulation (v0 WIP / PoC)](https://github.com/s-0-p-h-i-a/ICE_Engine_Simulations/tree/main/Engine_Cycle_CLI)**
     
     - A command-line C application simulating a 4-stroke inline-4 engine via text output.
 
@@ -31,15 +35,15 @@ Current projects include:
     
     - Expansion on the 1-cylinder project, simulating an inline-4 engine using an LED matrix.
 
-5. **Camshafts Simulation (Planned)**
+6. **Camshafts Simulation (Planned)**
     
     - Simulate valve distribution control in an inline-4 DOHC engine.
 
-6. **Fuel & Spark Simulation (Planned)**
+7. **Fuel & Spark Simulation (Planned)**
     
     - Simulate fuel injector and spark plug control.
 
-7. **Simple Inline-4 Engine Simulation (Planned)**
+8. **Simple Inline-4 Engine Simulation (Planned)**
     
     - Progressively combine previously developed cylinder, crank, cam, injection and ignition logic into modular, simplified Moore machine-like inline-4 engine control simulation.
 
