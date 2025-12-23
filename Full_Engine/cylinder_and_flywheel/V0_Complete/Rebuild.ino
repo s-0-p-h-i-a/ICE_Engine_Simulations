@@ -147,7 +147,19 @@ Previously:
 NOTES:
 RE: FLYWHEEL AND SERVO REINTEGRATION
 
-for flywheel/servo: i am not using delay or if checks for incrementation inside the servo module. it just checks if the servo response delta (using 15ms here) has elapsed and does servo.write (or not) with the angle the flywheel lib fed it. so that delta check is just in the servo module, the angle incrementation evolves separately inside the flywheel module. my logic here is that servo step timing and flywheel angle incrementation are two separate things with their own timelines, and the goal is that they sync up everytime spinflywheel calls moveservo and the servo response delta has elapsed. so in theory if i were to move the joystick back and forth before the servo delta, that variation would go nowhere. but the joystick reading function has a debounce anyway so in practice speed level is only updated once in every debounce period (100ms), and there is no continuous value reading and actuating, only a speed status update every 100ms that will be picked up after the current servo delta is elapsed. so the flywheel speed input and servo actuation are both discreetly periodic and their relation gets reset/rechecked every time the servo is in 'can respond to input' (= delta has elapsed) mode. any speed input reading between joystick debounce periods simply goes nowhere as from a human user/observer perspective the 100ms debounce time is negligible proportionally to the system and its purpose as a basic simulation. i'm visualising this as two parallel lines with different step lengths, the flywheel line with the speed input is sort of continuously (with changes possibly happening every 100ms) talking to the servo timeline, which in turn only 'listens' every 15ms. is this mental model correct or am i opening the door for timing issues?
+- The servo module just checks if the servo response delta (using 15ms here) has elapsed and does servo.write (or not) with the angle the flywheel lib fed it
+- That delta check is just in the servo module, the angle incrementation evolves separately inside the flywheel module
+- Servo step timing and flywheel angle incrementation are two separate things with their own timelines, the goal is that they sync up everytime spinflywheel calls moveservo and the servo response delta has elapsed
+- In theory if i were to move the joystick back and forth before the servo delta, that variation would go nowhere
+- But the joystick reading function has a debounce anyway so in practice:
+	-> speed level is only updated once in every debounce period (100ms)
+	- there is no continuous value reading and actuating, only a speed status update every 100ms that will be picked up after the current servo delta is elapsed
+- The flywheel speed input and servo actuation are both discreetly periodic
+- Their relation gets reset/rechecked every time the servo is in 'can respond to input' (= delta has elapsed) mode
+- Speed input reading between joystick debounce periods simply goes nowhere as from a human user/observer perspective the 100ms debounce time is negligible proportionally to the system and its purpose as a basic simulation
+- Mental model:
+	-> two parallel lines with different step lengths
+	- the flywheel line with the speed input is sort of continuously (with changes possibly happening every 100ms) talking to the servo timeline, which in turn only 'listens' every 15ms.
 
 23/12
 - Changed separate if branches to if-else for the speed and pause assignment in drive
