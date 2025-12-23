@@ -1,46 +1,39 @@
-# Flywheel & LED Cylinder Mini Embedded System
+# ECU-Inspired Engine Timing Prototype
 
 ## Overview
 
-This project simulates an engine + flywheel system controlled via a joystick, with LED cylinder visualization and Hall sensor RPM feedback. It is structured as a modular “mini embedded system” with separate hardware interface modules and logic modules.
-
-This project is the first step towards building a more complete Arduino-based inline-4 engine simulation, integrating a crankshaft and DOHC camshafts.
-
-Present code is all WIP, v0 will be pushed when basic functionality is achieved.
+This project is a **simplified ECU firmware prototype** focusing on engine timing, RPM calculation, and cylinder visualization. The emphasis is on **integration, debugging, and observing system behavior** rather than physical engine simulation.
 
 ---
-## Current Status: Rebuild
 
-- 1st draft built successfully on Arduino CLI.
+## Hardware
 
-- Hardware integration and live verification testing: system is responsive but desired behaviour was not achieved.
-
-- Rebuilding from the inside out: isolated module causing issues (cylinder header), rewriting/refactoring to address them
-
----
-## Modules
-
-- **Drive, Cylinder, CylinderVisuals** – handles engine logic and LED display
-
-- **Flywheellib** – flywheel simulation and dynamics
-
-- **Halllib** – Hall sensor input interface
-
-- **Joystick** – joystick input abstraction
-
-- **Servolib** – servo control
-
-- **Rpmlib** – RPM calculation
-
-- **Plotter** – serial output for visualization/debugging
-
-- **Global** – shared timing variables (`now`, `timewindow`)
+* Arduino MCU (ECU side)
+* Flywheel (servo with a magnet)
+* Hall sensor for RPM calculation
+* Breadboard LED matrix for cylinder visualization
+* Joystick for control
 
 ---
-### Design Notes
 
-- Logic and internal objects (`.c` modules) are hardware-agnostic and can be tested independently of Arduino.
+## Code Architecture
 
-- Hardware interface modules (`.cpp`) handle Arduino-specific functionality like LEDs, servos, and serial I/O.
+* **Flywheel module**		: tracks angle and speed
+* **Hall sensor module**	: provides timing events
+* **RPM calculation**		: converts timing data to speed
+* **Cylinder module**		: computes cylinder state
+* **Cylinder visualization**: breadboard LED output
+* **Joystick module**		: reads joystick input
+* **Drive module**			: on/off and speed control for the flywheel and cylinder
 
-- Clear separation of concerns allows safe refactoring and modular testing.
+Modules are designed to be testable in isolation, with integration exposing timing and logic issues for refinement.
+
+---
+
+## Next Steps
+
+* **Fault injection**: timing lag, jitter, dropped events, snapshot logging
+* **Expanded engine structure**: crank + cylinder head module with DOHC, valves, injectors, plugs
+* **CAN integration**: second MCU handles user input and logging
+
+Additional documentation, diagrams, demos, and design notes will be added as the project evolves.
