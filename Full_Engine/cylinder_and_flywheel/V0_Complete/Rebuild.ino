@@ -117,6 +117,7 @@ Previously:
 - This code:
 
 		flywheelSpeed = flywheelSpeed ? speed : -speed;
+		-> ISSUE HERE: flywheelSpeed true for any non zero value?
 	
 		handleEdgeValues();
 		checkDirectionToggle();
@@ -169,7 +170,8 @@ RE: FLYWHEEL AND SERVO REINTEGRATION
 
 23/12
 - Changed separate if branches to if-else for the speed and pause assignment in drive
-g
+
+
  */
 
 #include "joystick.h"
