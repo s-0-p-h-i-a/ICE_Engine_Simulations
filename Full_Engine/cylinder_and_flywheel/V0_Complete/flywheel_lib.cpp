@@ -28,8 +28,8 @@ void handleEdgeValues(void) {
 
 uint8_t checkDirectionToggle(void) {
 	
-	uint8_t toggleSpeedZero = (flywheelAngle == ANGLE_ZERO) && (flywheelSpeed < 0);
-	uint8_t toggleSpeed180  = (flywheelAngle == ANGLE_180)  && (flywheelSpeed > 0);
+	uint8_t toggleSpeedZero = (flywheelAngle == ANGLE_ZERO) && (flywheelSpeed < ZERO);
+	uint8_t toggleSpeed180  = (flywheelAngle == ANGLE_180)  && (flywheelSpeed > ZERO);
 			
 	uint8_t toggleNow = toggleSpeedZero || toggleSpeed180;
 	sweepBack = toggleNow;
