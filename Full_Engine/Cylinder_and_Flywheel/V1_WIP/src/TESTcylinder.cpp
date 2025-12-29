@@ -16,8 +16,8 @@ Process:
 - Internal stroke/state variable updated at every LED blink cycle
 - Cylinder object internally updated using current stroke as index to read reference matrix
 
-Used by:
-displayCylinder in cylinderVisuals.cpp
+Driven by:
+displayCylinder in cylinderVisuals.cpp via updateCylinderState call
 
 */
 

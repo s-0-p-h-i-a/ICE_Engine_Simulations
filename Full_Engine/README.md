@@ -2,68 +2,43 @@
 
 ## Overview
 
-This project is a **simplified ECU firmware prototype** focusing on engine timing, RPM calculation, and cylinder visualization. The emphasis is on **system design, integration, debugging, and observing system behavior** rather than physical engine simulation.
+Ongoing simplified ECU firmware-like prototype project. The emphasis is on system design, integration, debugging, and observing system behaviour rather than physical engine simulation.
 
 ---
-## Hardware
+## Goals / Plans:
 
-* Arduino MCU (ECU side)
-* Flywheel (servo with a magnet for RPM reference edge)
-* Hall sensor for RPM calculation
-* Coloured breadboard LED matrix for cylinder visualization
-* Joystick for control
+- Build a simple, deterministic ICE ECU firmware-inspired engine control/simulation system
+- Progressively integrate different sub-systems
+- Explore fault injection and CAN communication
+- Implement hardware-based behaviour simulations and visualisations
 
----
-## Project Status & Next Steps
-
-### Cylinder + Flywheel + RPM Calculation Modules
-
-Fully integrated in v0, ongoing rework in v1.
-
-* **V0**: fully functioning version, verified and validated hardware integration. Documentation coming soon
-* **V1 (WIP)**: ongoing semantic rework, adding in-code comments, and localised logic / architecture refactors
-
----
-## Behaviour:
-
-* User turns system on/off via joystick button click (digital Z)
-* "Speed"/RPM setting chosen via analog joystick X axis:
-	* Neutral	: idle
-	* Up		: speed 1
-	* Down 	: speed 2
-* Speed mode is interpreted for "flywheel" and cylinder sub-systems:
-	* Flywheel: rotating movement 0° - 360° -> "speed" = angle increment
-	* Cylinder: on/off blink cycles -> "speed" = blink on/off timing
-
-| Speed Modes |   Flywheel/Servo   |   Cylinder    |
-| :---------: | :----------------: | :-----------: |
-|    Idle     | 2° angle increment | 1000ms on/off |
-|   Speed 1   | 4° angle increment | 550ms on/off  |
-|   Speed 2   | 6° angle increment | 100ms on/off  |
+### Planned Sub-systems:
+- Cylinder head:
+	- Double camshafts
+	- Valves
+	- Fuel injectors
+	- Spark plugs
+- Cylinder:
+	- Cylinder body
+	- Piston
+- Crankshaft
+- Flywheel
 
 ---
-## Code Architecture
+## Project Status
 
-**v0 and v1:**
-* **Flywheel module**			: tracks angle and speed
-* **Hall sensor module**		: provides timing events
-* **RPM calculation**			: converts timing data to speed
-* **Cylinder module**			: computes cylinder state
-* **Cylinder visualization**	: breadboard LED output
-* **Joystick module**			: reads joystick input
-* **Drive module**				: on/off and speed control for the flywheel and cylinder
-* **Plotter module**			: displays data on serial plotter
+### Complete:
 
-**v1 only:**
-* **Plotter interface modules**	: expose processed subsystem data for plotting and diagnostics.
+[**Cylinder + Flywheel RPM Calculation System**](https://github.com/s-0-p-h-i-a/ICE_Engine_Simulations/tree/main/Full_Engine/Cylinder_and_Flywheel):
 
-Modules are designed to be testable in isolation, with integration exposing timing and logic issues for refinement.
+Integrates previously separate cylinder and flywheel rpm projects into one system with centralised user control.
 
----
-## Next Steps
+- User-controlled via joystick
+- 4 main sub-systems:
+	- Control: user input for on/off and speed
+	- Cylinder: breadboard LED display
+	- RPM calculation: Hall sensor + standard servo with magnet for reference edge generation
+	- Plotter display: system data telemetry
+- v0 fully functional, v1 WIP
 
-* **Fault injection**: timing lag, jitter, dropped events, snapshot logging
-* **Expanded engine structure**: crank + cylinder head module with DOHC, valves, injectors, plugs
-* **CAN integration**: second MCU handles user input and logging
 
-Additional documentation, diagrams, demos, and design notes will be added as the project evolves.
